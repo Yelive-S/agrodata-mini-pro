@@ -245,11 +245,12 @@ def mostrar_info_sqlite() -> None:
     print(f"Filas en weekly_metrics: {total_metricas}")
     print(f"Duplicados por finca/semana: {duplicados}")
 
-
-def graficar_leche_por_finca(registros: list[dict]) -> None:
+def graficar_leche_por_finca(registros):
     resumen = resumen_por_finca(registros)
     nombres = [f["finca"] for f in resumen]
     litros = [f["total_leche"] for f in resumen]
+
+    REPORTS_DIR.mkdir(exist_ok=True)
 
     plt.figure(figsize=(11, 6))
     plt.bar(nombres, litros)
@@ -258,7 +259,12 @@ def graficar_leche_por_finca(registros: list[dict]) -> None:
     plt.ylabel("Litros de leche")
     plt.xticks(rotation=45)
     plt.tight_layout()
+
+    ruta_salida = REPORTS_DIR / "grafico_leche_por_finca.png"
+    plt.savefig(ruta_salida)
     plt.show()
+
+    print(f"Gráfico guardado en: {ruta_salida}")
 
 
 def graficar_tendencia_finca(registros: list[dict], nombre_finca: str) -> None:

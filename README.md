@@ -64,4 +64,7 @@ La clave lógica usada para evitar filas repetidas es:
 Además, SQLite refuerza esto con:
 ```sql
 UNIQUE (finca_id, semana)
+
+# AUTOR 
+YESICA VELEZ
 ```
